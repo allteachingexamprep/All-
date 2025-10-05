@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>वायुमंडल (Vayumandal) Quiz — 10 Questions</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;}
+    body{background:#f7fafc;color:#0f172a;margin:0;padding:0}
+    header{background:#0f172a;color:#fff;padding:14px;text-align:center}
+    header a{color:#facc15;text-decoration:none;font-weight:700}
+    .wrap{max-width:760px;margin:22px auto;padding:18px;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.06)}
+    h1{font-size:1.4rem;margin:0 0 6px}
+    p.lead{color:#475569;margin-top:0}
+    .question{font-weight:700;margin:18px 0 10px}
+    .options label{display:block;padding:10px;margin:8px 0;border-radius:8px;background:#eef2f7;cursor:pointer;transition:0.15s}
+    .options input{margin-right:10px}
+    .options label:hover{transform:translateY(-2px)}
+    .correct{background:#bbf7d0 !important;color:#064e3b}
+    .wrong{background:#fecaca !important;color:#7f1d1d}
+    .controls{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:14px;flex-wrap:wrap}
+    button{background:#0ea5e9;color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600}
+    button.secondary{background:#94a3b8}
+    #scoreBox{margin-top:16px;text-align:center;font-weight:700}
+    footer{margin-top:18px;text-align:center;color:#64748b;font-size:0.9rem}
+    @media(max-width:520px){.wrap{margin:12px;padding:14px}}
+  </style>
+</head>
+<body>
+
+<header>
+  Vayumandal Quiz — LT Grade GS Free • <a href="https://t.me/ltgradegsfree" target="_blank">Join Telegram</a>
+</header>
+
+<div class="wrap">
+  <h1>वायुमंडल (Atmosphere) — 10 प्रश्न</h1>
+  <p class="lead">प्रत्येक प्रश्न का उत्तर दें — उत्तर चुनते ही सही/गलत दिखेगा। अगला प्रश्न देखने के लिए <b>Next</b> दबाएँ। अंत में कुल अंक दिखेंगे।</p>
+
+  <div id="quizArea"></div>
+
+  <div class="controls">
+    <button id="nextBtn" onclick="nextQuestion()" style="display:none">Next Question</button>
+    <button id="skipBtn" class="secondary" onclick="skipQuestion()">Skip</button>
+    <button id="restartBtn" class="secondary" onclick="restartQuiz()" style="display:none">Restart Quiz</button>
+  </div>
+
+  <div id="scoreBox"></div>
+</div>
+
+<footer>© 2025 LT Grade GS Free — Created by Anu</footer>
+
+<script>
+/*
+  10 Vayumandal (Atmosphere) Questions in Hindi.
+  - One-by-one display
+  - Shuffle options each time
+  - Immediate feedback (correct/wrong)
+  - Final total score
+*/
+
+const quizData = [
+  { q: "वायुमंडल का सबसे निचला स्तर कौन-सा है जहां हम रहते हैं ?", options:["ट्रॉपोस्फियर","स्ट्रैटोस्फियर","मेयोसोफियर","थर्मोस्फियर"], a:"ट्रॉपोस्फियर" },
+  { q: "ओज़ोन परत मुख्यतः किस स्तर में पाई जाती है?", options:["स्ट्रैटोस्फियर","ट्रॉपोस्फियर","मेयोसोफियर","एक्सोस्फियर"], a:"स्ट्रैटोस्फियर" },
+  { q: "वायुमंडल में सबसे अधिक मात्रा किस गैस की पाई जाती है?", options:["नाइट्रोजन (N₂)","ऑक्सीजन (O₂)","कार्बन डाइऑक्साइड (CO₂)","हेलियम (He)"], a:"नाइट्रोजन (N₂)" },
+  { q: "घटक गैसों के अनुपात के अनुसार वायुमंडल में ऑक्सीजन की प्रतिशत मात्रा लगभग कितनी है?", options:["~21%","~78%","~0.04%","~2%"], a:"~21%" },
+  { q: "ग्रीनहाउस प्रभाव में मुख्य भूमिका निभाने वाली गैस कौन-सी है?", options:["कार्बन डाइऑक्साइड","नाइट्रोजन","ऑक्सीजन","हाइड्रोजन"], a:"कार्बन डाइऑक्साइड" },
+  { q: "जो वायुमंडलीय परत आयनोस्फीयर कहलाती है, वह मुख्यतः किस काम के लिए जानी जाती है?", options:["रेडियो तरंगों का परावर्तन/प्रसारण","विषैले गैसों का संचित होना","घने बादल बनाना","जेट स्ट्रीम बनाना"], a:"रेडियो तरंगों का परावर्तन/प्रसारण" },
+  { q: "ट्रॉपोस्फियर में तापमान सामान्यतः ऊँचाई के साथ किस तरह बदलता है?", options:["कम होता जाता है","बढ़ता जाता है","पहले बढ़ता फिर घटता है","कोई बदलाव नहीं"], a:"कम होता जाता है" },
+  { q: "‘प्रीशर’ (वायुदाब) सामान्यतः ऊँचाई बढ़ने पर कैसे बदलता है?", options:["घटता है","बढ़ता है","पहले बढ़ता फिर घटता है","कोई अंतर नहीं"], a:"घटता है" },
+  { q: "जेट स्ट्रीम मुख्यतः किस परत में पाए जाते हैं?", options:["ट्रॉपोस्फियर के ऊपरी भाग/ट्रॉपोपॉज़ा","स्ट्रैटोस्फियर के निचले भाग","मेयोसोफियर","एक्सोस्फियर"], a:"ट्रॉपोस्फियर के ऊपरी भाग/ट्रॉपोपॉज़ा" },
+  { q: "ओज़ोन परत का प्रमुख कार्य क्या है?", options:["हानिकारक UV किरणों से सुरक्षा","गर्मी को विकसित करना","ऑक्सीजन बनाना","मौसम नियंत्रित करना"], a:"हानिकारक UV किरणों से सुरक्षा" }
+];
+
+// shuffle array helper (Fisher-Yates)
+function shuffleArray(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+let current = 0;
+let score = 0;
+let answered = 0;
+
+function renderQuestion(){
+  const area = document.getElementById('quizArea');
+  area.innerHTML = '';
+  document.getElementById('scoreBox').innerText = `Question ${current+1} of ${quizData.length} • Score: ${score}`;
+  if(current >= quizData.length){
+    // finished
+    area.innerHTML = `<h3>🎯 Quiz पूरा हुआ!</h3><p style="font-weight:700">आपका कुल स्कोर: ${score} / ${quizData.length}</p>`;
+    document.getElementById('nextBtn').style.display = 'none';
+    document.getElementById('skipBtn').style.display = 'none';
+    document.getElementById('restartBtn').style.display = 'inline-block';
+    return;
+  }
+  const item = quizData[current];
+  const opts = shuffleArray(item.options); // shuffle options every time
+  const qEl = document.createElement('div');
+  qEl.innerHTML = `<div class="question">${current+1}. ${item.q}</div>
+    <div class="options">
+      ${opts.map(opt=>`<label><input type="radio" name="opt" value="${escapeHtml(opt)}"> ${opt}</label>`).join('')}
+    </div>`;
+  area.appendChild(qEl);
+
+  // attach listeners
+  const inputs = area.querySelectorAll('input[type="radio"][name="opt"]');
+  inputs.forEach(inp=>{
+    inp.addEventListener('change',(e)=>{
+      // disable all inputs and show feedback
+      inputs.forEach(i=>i.disabled=true);
+      const chosen = unescapeHtml(e.target.value);
+      const labels = area.querySelectorAll('label');
+      labels.forEach(label=>{
+        const text = label.innerText.trim();
+        if(text === item.a){
+          label.classList.add('correct');
+        }
+        if(text === chosen && chosen !== item.a){
+          label.classList.add('wrong');
+        }
+      });
+      if(chosen === item.a) score++;
+      answered++;
+      document.getElementById('nextBtn').style.display = 'inline-block';
+    });
+  });
+
+  document.getElementById('nextBtn').style.display = 'none';
+  document.getElementById('skipBtn').style.display = 'inline-block';
+  document.getElementById('restartBtn').style.display = 'none';
+  document.getElementById('scoreBox').innerText = `Question ${current+1} of ${quizData.length} • Score: ${score}`;
+}
+
+function nextQuestion(){
+  current++;
+  renderQuestion();
+}
+
+function skipQuestion(){
+  // mark none selected, just move next
+  current++;
+  renderQuestion();
+}
+
+function restartQuiz(){
+  current = 0; score = 0; answered = 0;
+  renderQuestion();
+}
+
+function escapeHtml(text){
+  return text.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,"&#039;").replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function unescapeHtml(s){
+  return s.replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#039;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+}
+
+// initial render
+renderQuestion();
+</script>
+
+</body>
+</html>
