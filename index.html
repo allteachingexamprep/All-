@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Teaching Exam Hub — Vacancy, Notes, MCQ Practice | LT Grade GS</title>
+  <meta name="description" content="Teaching exam news, vacancy updates, free notes, MCQ practice and current affairs for CTET / BPSC TRE / STET / LT Grade." />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo="> 
+  <style>
+    :root{--bg:#f7fbff;--card:#ffffff;--muted:#526076;--accent:#0ea5a5;--accent-2:#06b6d4}
+    *{box-sizing:border-box;font-family:Inter,system-ui,Segoe UI,Roboto,'Noto Sans',Arial}
+    body{margin:0;background:linear-gradient(180deg,#eef8fb 0%,#f7fbff 100%);color:#05263a}
+    .wrap{max-width:1100px;margin:28px auto;padding:18px}
+    header{display:flex;align-items:center;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
+    h1{margin:0;font-size:20px}
+    .tag{color:var(--muted);font-size:13px}
+    nav{margin-left:auto}
+    nav a{margin-left:10px;text-decoration:none;color:var(--accent);font-weight:700}
+    .hero{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-top:18px}
+    .card{background:var(--card);border-radius:12px;box-shadow:0 6px 20px rgba(10,31,68,0.06);padding:16px}
+    .btn{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+    .small{font-size:14px;color:var(--muted)}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    .vacancy-list{max-height:260px;overflow:auto;padding-right:6px}
+    .vac-item{padding:10px;border-radius:8px;border:1px solid #e6f2f2;margin-bottom:8px}
+    .notes-list li{margin-bottom:8px}
+    aside .card{position:sticky;top:18px}
+    footer{margin-top:18px;padding:12px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr}}
+    input[type="email"]{padding:10px;border-radius:8px;border:1px solid #e6eef2;width:100%}
+    
+    /* New styles for Today's News and Quiz */
+    .news-ticker {
+      background: #e6f7ff;
+      padding: 8px 15px;
+      border-radius: 6px;
+      margin: 10px 0;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+    .news-ticker span {
+      background: var(--accent);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    .news-item {
+      padding: 10px;
+      border-bottom: 1px dashed #e0e0e0;
+    }
+    .news-item:last-child {
+      border-bottom: none;
+    }
+    .news-date {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .quiz-container {
+      background: #f9f9f9;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 15px;
+    }
+    .quiz-question {
+      margin-bottom: 15px;
+    }
+    .quiz-options {
+      margin-left: 20px;
+    }
+    .quiz-option {
+      margin-bottom: 8px;
+    }
+    .quiz-submit {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .quiz-result {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 6px;
+      display: none;
+    }
+    .correct {
+      background: #e6ffed;
+      color: #006400;
+    }
+    .incorrect {
+      background: #ffe6e6;
+      color: #8b0000;
+    }
+    
+    /* Top bar like SarkariResult */
+    .top-bar {
+      background: #0ea5a5;
+      color: white;
+      padding: 8px 0;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    
+    /* Navigation menu */
+    .main-nav {
+      background: #0ea5a5;
+      margin-top: 15px;
+      border-radius: 8px;
+    }
+    .main-nav ul {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      justify-content: space-around;
+    }
+    .main-nav li {
+      padding: 12px 0;
+    }
+    .main-nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 12px 15px;
+    }
+    .main-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+    }
+    
+    /* Section headers */
+    .section-header {
+      background: #0ea5a5;
+      color: white;
+      padding: 12px 15px;
+      border-radius: 8px 8px 0 0;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    
+    /* Exam date table */
+    .exam-dates {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .exam-dates td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #e6f2f2;
+    }
+    .exam-dates tr:last-child td {
+      border-bottom: none;
+    }
+    .exam-dates .date-label {
+      font-weight: bold;
+      width: 40%;
+    }
+    .exam-dates .date-value {
+      color: #0ea5a5;
+    }
+    
+    /* Important dates highlight */
+    .dates-highlight {
+      background: #fff9e6;
+      border-left: 4px solid #ffcc00;
+      padding: 10px 15px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    /* Official Links Grid */
+    .official-links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+    .official-link-card {
+      text-align: center;
+      background: #f0f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+    .official-link-card:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    Teaching Exam Hub: DSSSB / EMRS / KVS / NVS / CTET / BPSC TRE / STET / LT Grade - Vacancy, Notes, MCQ Practice
+  </div>
+  
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">TEH</div>
+        <div>
+          <h1>Teaching Exam Hub</h1>
+          <div class="tag">News • Vacancy • Notes • MCQs • Current Affairs</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="https://t.me/ltgradegsfree" target="_blank" rel="noopener">Join Telegram</a>
+        <a href="#vacancies">Vacancies</a>
+        <a href="#notes">Free Notes</a>
+        <a href="#mcq">MCQ Practice</a>
+      </nav>
+    </header>
+    
+    <!-- Main Navigation Menu -->
+    <div class="main-nav">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#today-news">Today's News</a></li>
+        <li><a href="#today-quiz">Today's Quiz</a></li>
+        <li><a href="#vacancies">Latest Jobs</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#admit-card">Admit Card</a></li>
+        <li><a href="#answer-key">Answer Key</a></li>
+        <li><a href="#syllabus">Syllabus</a></li>
+      </ul>
+    </div>
+
+    <div class="hero">
+      <main>
+        <!-- Today's News Section -->
+        <div class="section-header" id="today-news">Today's News</div>
+        <div class="card">
+          <div class="news-ticker">
+            <span>BREAKING</span> DSSSB PRT 2025 Online Application Starts on 09 October 2025
+          </div>
+          
+          <div class="news-item">
+            <h3>DSSSB PRT 2025 Notification Released</h3>
+            <p class="small">Delhi Subordinate Services Selection Board has released the notification for PRT (Primary Teacher) recruitment 2025. Online application process will begin on 09 October 2025.</p>
+            <div class="news-date">August 28, 2024</div>
+          </div>
+          
+          <div class="news-item">
+            <h3>CTET 2025 Notification Expected in September</h3>
+            <p class="small">Central Board of Secondary Education is expected to release CTET 2025 notification in the first week of September. Application process will be completely online.</p>
+            <div class="news-date">August 28, 2024</div>
+          </div>
+                    <div class="news-item">
+            <h3>CTET 2025 Notification Expected in September</h3>
+            <p class="small">Central Board of Secondary Education is expected to release CTET 2025 notification in the first week of September. Application process will be completely online.</p>
+            <div class="news-date">August 28, 2024</div>
+          </div>
+          
+          <div class="news-item">
+            <h3>NEP 2020 Implementation in Teacher Education</h3>
+            <p class="small">NCERT has released new guidelines for teacher education programs aligning with NEP 2020. Four-year integrated B.Ed. programs to be launched from 2025 academic session.</p>
+            <div class="news-date">August 27, 2024</div>
+          </div>
+          
+          <a href="#" class="btn" style="margin-top: 10px;">View All News</a>
+        </div>
+
+                <!-- DSSSB PRT 2025 Section -->
+        <div class="section-header">DSSSB PRT 2025 - Primary Teacher Recruitment</div>
+        <div class="card">
+          <div style="text-align:center; background:#f0f9fa; padding:20px; border-radius:8px; margin-bottom: 20px;">
+            <h3 style="color:#0ea5a5; margin-bottom:10px;">DSSSB 2025 PRT</h3>
+            <p class="small">Primary Teacher (PRT) Recruitment</p>
+            <a href="https://dsssbonline.nic.in/" target="_blank" rel="noopener"
+               style="background:#008080;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;display:inline-block;margin-top:12px; font-weight:bold;">
+               👉 Apply for DSSSB PRT 2025
+            </a>
+          </div>
+          
+          <div class="dates-highlight">
+            <strong>Important Dates:</strong> Application window open from 09 October 2025 to 07 November 2025
+          </div>
+          
+          <table class="exam-dates">
+            <tr>
+              <td class="date-label">Online Apply Start Date</td>
+              <td class="date-value">09 October 2025</td>
+            </tr>
+            <tr>
+              <td class="date-label">Online Apply Last Date</td>
+              <td class="date-value">07 November 2025</td>
+            </tr>
+            <tr>
+              <td class="date-label">Last Date For Fee Payment</td>
+              <td class="date-value">07 November 2025</td>
+            </tr>
+            <tr>
+              <td class="date-label">Exam Date</td>
+              <td class="date-value">Notified Soon</td>
+            </tr>
+            <tr>
+              <td class="date-label">Admit Card Release</td>
+              <td class="date-value">Before Exam</td>
+            </tr>
+            <tr>
+              <td class="date-label">Result Date</td>
+              <td class="date-value">Will Be Updated Here Soon</td>
+            </tr>
+          </table>
+          
+          <div style="margin-top: 15px;">
+            <h4>Eligibility Criteria:</h4>
+            <ul>
+              <li>Senior Secondary (or its equivalent) with at least 50% marks</li>
+              <li>2-year Diploma in Elementary Education</li>
+              <li>Age Limit: 18-30 years (Age relaxation as per government rules)</li>
+            </ul>
+          </div>
+        </div>
+                <!-- DSSSB PRT 2025 Section -->
+        <div class="section-header">DSSSB PRT 2025 - Primary Teacher Recruitment</div>
+        <div class="card">
+          <div style="text-align:center; background:#f0f9fa; padding:20px; border-radius:8px; margin-bottom: 20px;">
+            <h3 style="color:#0ea5a5; margin-bottom:10px;">DSSSB 2025 PRT</h3>
+            <p class="small">Primary Teacher (PRT) Recruitment</p>
+            <a href="https://dsssbonline.nic.in/" target="_blank" rel="noopener"
+               style="background:#008080;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;display:inline-block;margin-top:12px; font-weight:bold;">
+               👉 Apply for DSSSB PRT 2025
+            </a>
+          </div>
+          
+          <div class="dates-highlight">
+            <strong>Important Dates:</strong> Application window open from 09 October 2025 to 07 November 2025
+          </div>
+          
+          <table class="exam-dates">
+            <tr>
+              <td class="date-label">Online Apply Start Date</td>
+              <td class="date-value">09 October 2025</td>
+            </tr>
+            <tr>
+              <td class="date-label">Online Apply Last Date</td>
+              <td class="date-value">07 November 2025</td>
+            </tr>
+            <tr>
+              <td class="date-label">Last Date For Fee Payment</td>
+              <td class="date-value">07 November 2025</td>
+            </tr>
+            <tr>
+              <td class="date-label">Exam Date</td>
+              <td class="date-value">Notified Soon</td>
+            </tr>
+            <tr>
+              <td class="date-label">Admit Card Release</td>
+              <td class="date-value">Before Exam</td>
+            </tr>
+            <tr>
+              <td class="date-label">Result Date</td>
+              <td class="date-value">Will Be Updated Here Soon</td>
+            </tr>
+          </table>
+          
+          <div style="margin-top: 15px;">
+            <h4>Eligibility Criteria:</h4>
+            <ul>
+              <li>Senior Secondary (or its equivalent) with at least 50% marks</li>
+              <li>2-year Diploma in Elementary Education</li>
+              <li>Age Limit: 18-30 years (Age relaxation as per government rules)</li>
+            </ul>
+          </div>
+        </div>
+
+       
+
+        <!-- Official Links Section -->
+        <div class="section-header">Official Apply Links</div>
+        <div class="card">
+          <div class="official-links-grid">
+            <div class="official-link-card">
+              <h3 style="color:#0ea5a5; margin-bottom:10px;">DSSSB PRT 2025</h3>
+              <p class="small">Primary Teacher Recruitment</p>
+              <a href="https://dsssbonline.nic.in/" target="_blank" rel="noopener"
+                 style="background:#008080;color:#fff;padding:8px 14px;border-radius:6px;text-decoration:none;display:inline-block;margin-top:8px;">
+                 👉 Apply for DSSSB PRT 2025
+              </a>
+            </div>
+            
+            <div class="official-link-card">
+              <h3 style="color:#0ea5a5; margin-bottom:10px;">RPSC 2025</h3>
+              <p class="small">Rajasthan Public Service Commission</p>
+              <a href="https://sso.rajasthan.gov.in/" target="_blank" rel="noopener"
+                 style="background:#008080;color:#fff;padding:8px 14px;border-radius:6px;text-decoration:none;display:inline-block;margin-top:8px;">
+                 👉 Apply via SSO Rajasthan
+              </a>
+            </div>
+            
+            <div class="official-link-card">
+              <h3 style="color:#0ea5a5; margin-bottom:10px;">STET 2025</h3>
+              <p class="small">Bihar Secondary Teacher Eligibility Test</p>
+              <a href="https://appsecondary.biharboardonline.com/index.html" target="_blank" rel="noopener"
+                 style="background:#008080;color:#fff;padding:8px 14px;border-radius:6px;text-decoration:none;display:inline-block;margin-top:8px;">
+                 👉 Apply For STET 2025
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vacancies Section -->
+        <div class="section-header" id="vacancies">Latest Teaching Vacancies</div>
+        <div class="card">
+          <div id="vacanciesAll">
+            <!-- vacancies injected by JS -->
+          </div>
+          <a href="#" class="btn" style="margin-top: 10px;">View All Vacancies</a>
+        </div>
+         <!-- Today's Quiz Section -->
+        <div class="section-header" id="today-quiz">Today's Quiz - Child Development & Pedagogy</div>
+        <div class="card">
+          <div class="quiz-container">
+            <div class="quiz-question">
+              <p><strong>1. According to Piaget, at which stage can children think logically about abstract propositions?</strong></p>
+              <div class="quiz-options">
+                <div class="quiz-option">
+                  <input type="radio" id="q1a" name="q1" value="a">
+                  <label for="q1a">Sensorimotor stage</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" id="q1b" name="q1" value="b">
+                  <label for="q1b">Preoperational stage</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" id="q1c" name="q1" value="c">
+                  <label for="q1c">Concrete operational stage</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" id="q1d" name="q1" value="d">
+                  <label for="q1d">Formal operational stage</label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="quiz-question">
+              <p><strong>2. Which of the following is NOT a principle of development?</strong></p>
+              <div class="quiz-options">
+                <div class="quiz-option">
+                  <input type="radio" id="q2a" name="q2" value="a">
+                  <label for="q2a">Development is predictable</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" id="q2b" name="q2" value="b">
+                  <label for="q2b">Development is the same for everyone</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" id="q2c" name="q2" value="c">
+                  <label for="q2c">Development proceeds from general to specific</label>
+                </div>
+                <div class="quiz-option">
+                  <input type="radio" id="q2d" name="q2" value="d">
+                  <label for="q2d">Development is a continuous process</label>
+                </div>
+              </div>
+            </div>
+            
+            <button class="quiz-submit" onclick="checkQuiz()">Submit Answers</button>
+            
+            <div id="quiz-result" class="quiz-result"></div>
+          </div>
+        </div>
+
+        <!-- NEP 2020 Section -->
+        <div class="section-header">NEP 2020 — Quick Summary & Resources</div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <h2 style="margin:0">NEP 2020 — Quick Summary & Resources</h2>
+              <div class="small">Short notes + 20 MCQs ready. Start practice now.</div>
+            </div>
+            <a class="btn" href="#mcq">Start MCQ Practice</a>
+          </div>
+
+          <div style="margin-top:12px" id="summary">
+            <ol>
+              <li>NEP 2020 — स्वीकृति: 29 जुलाई 2020।</li>
+              <li>नयी संरचना: <strong>5+3+3+4</strong> (Foundational, Preparatory, Middle, Secondary)।</li>
+              <li>मातृभाषा प्राथमिक माध्यम; कक्षा 5 तक अनिवार्य (संभव हो तो 8 तक)।</li>
+              <li>शिक्षक शिक्षा: 4-वर्षीय Integrated B.Ed. का लक्ष्य।</li>
+              <li>Higher Education: MERU, HECI, ABC, MPhil समाप्त।</li>
+            </ol>
+          </div>
+
+          <div style="margin-top:12px" class="grid-3">
+            <div class="card small">
+              <strong>Latest Vacancy</strong>
+              <div class="vacancy-list" id="vacList">
+                <!-- vacancy items injected by JS -->
+              </div>
+              <a class="small" href="#vacancies">See all vacancies →</a>
+            </div>
+
+            <div class="card small">
+              <strong>Recent Notes</strong>
+              <ul class="notes-list" id="notesList">
+                <!-- notes injected by JS -->
+              </ul>
+              <a class="small" href="#notes">All Notes →</a>
+            </div>
+
+            <div class="card small">
+              <strong>Quick Links</strong>
+              <ul style="padding-left:16px;line-height:1.6">
+                <li><a href="#mcq">NEP 2020 MCQ Test</a></li>
+                <li><a href="#current">Current Affairs</a></li>
+                <li><a href="#resources">PYQs & Solutions</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notes Section -->
+        <div class="section-header" id="notes">Free Notes & PDFs</div>
+        <div class="card">
+          <p class="small">Download subject-wise notes and monthly current affairs PDFs.</p>
+          <ul id="notesAll">
+            <!-- full notes list -->
+          </ul>
+          <a href="#" class="btn" style="margin-top: 10px;">Download All Notes</a>
+        </div>
+
+        <!-- MCQ Practice Section -->
+        <div class="section-header" id="mcq">MCQ Practice — NEP 2020 (20 Questions)</div>
+        <div class="card">
+          <p class="small">Timer based practice and instant scoring. Click below to open interactive test.</p>
+          <a class="btn" href="#" id="openMcq">Open NEP 2020 Test</a>
+        </div>
+
+      </main>
+
+      <aside>
+        <div class="card">
+          <strong>Subscribe for Updates</strong>
+          <p class="small">Get vacancy alerts & free PDFs in inbox.</p>
+          <form id="subForm">
+            <input type="email" id="email" placeholder="Your email" required />
+            <div style="margin-top:8px"><button class="btn" type="submit">Subscribe</button></div>
+          </form>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="card">
+          <strong>Telegram</strong>
+          <p class="small">Get instant vacancy & notes — join our channel.</p>
+          <a class="btn" href="https://t.me/ltgradegsfree" target="_blank">Join Telegram</a>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="card">
+          <strong>Quick Links</strong>
+          <ul style="padding-left:16px;line-height:1.6">
+            <li><a href="#">CTET Syllabus 2025</a></li>
+            <li><a href="#">BPSC TRE Previous Papers</a></li>
+            <li><a href="#">STET Answer Key 2024</a></li>
+            <li><a href="#">Teaching Methodology Notes</a></li>
+            <li><a href="#">Current Affairs Monthly PDF</a></li>
+          </ul>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="card">
+          <strong>Upcoming Exams</strong>
+          <ul style="padding-left:16px;line-height:1.6">
+            <li><a href="#">DSSSB PRT 2025</a></li>
+            <li><a href="#">CTET January 2025</a></li>
+            <li><a href="#">BPSC TRE 3.0</a></li>
+            <li><a href="#">KVS PRT 2024</a></li>
+            <li><a href="#">NVS TGT 2024</a></li>
+          </ul>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="card small">
+          <strong>About</strong>
+          <p class="small">This site provides free resources for teaching exam aspirants: vacancy alerts, MCQs, PDFs and coaching tips. Content Writer: <strong>Anurag</strong></p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div>Content Writer: <strong>Anurag</strong></div>
+      <div class="small">© Teaching Exam Hub — Made for Teaching Exam Aspirants</div>
+    </footer>
+  </div>
+
+  <script>
+    // Placeholder data — replace with server-side or CMS data when available
+    const vacancies = [
+      {title: 'DSSSB PRT 2025 — Primary Teacher Vacancy', org:'DSSSB', lastDate:'07 Nov 2025', link:'#'},
+      {title: 'BPSC TRE — Graduate Teacher Vacancy 2025', org:'BPSC', lastDate:'15 Oct 2025', link:'#'},
+      {title: 'CTET Notification 2025 — Paper 1 & 2', org:'CBSE', lastDate:'05 Nov 2025', link:'#'},
+      {title: 'STET Bihar — Post Graduate Teacher', org:'BSEB', lastDate:'20 Oct 2025', link:'#'},
+      {title: 'UP TET 2024 Application Extended', org:'UPBEB', lastDate:'15 Sep 2024', link:'#'},
+      {title: 'KVS PRT Recruitment 2024', org:'Kendriya Vidyalaya', lastDate:'10 Sep 2024', link:'#'}
+    ];
+
+    const notes = [
+      {title:'NEP 2020 Summary PDF', tag:'Policy', link:'#'},
+      {title:'Child Development & Pedagogy Notes', tag:'Pedagogy', link:'#'},
+      {title:'Economics Notes for TRE (PDF)', tag:'Economics', link:'#'},
+      {title:'Teaching Methods & Approaches', tag:'Methodology', link:'#'},
+      {title:'August 2024 Current Affairs', tag:'Current Affairs', link:'#'}
+    ];
+
+    const vacListEl = document.getElementById('vacList');
+    const vacAllEl = document.getElementById('vacanciesAll');
+    const notesListEl = document.getElementById('notesList');
+    const notesAllEl = document.getElementById('notesAll');
+
+    // Populate vacancies
+    vacancies.forEach(v=>{
+      const item = document.createElement('div');
+      item.className='vac-item';
+      item.innerHTML = `<strong>${v.title}</strong><div class=\"small\">${v.org} — Last Date: ${v.lastDate}</div><div style=\"margin-top:8px\"><a href=\"${v.link}\" class=\"small\">Official Link</a></div>`;
+      vacListEl.appendChild(item);
+
+      const all = document.createElement('div');
+      all.className='vac-item';
+      all.innerHTML = item.innerHTML;
+      vacAllEl.appendChild(all);
+    });
+
+    // Populate notes
+    notes.forEach(n=>{
+      const li = document.createElement('li');
+      li.innerHTML = `<a href=\"${n.link}\">${n.title}</a> <span class=\"small\">• ${n.tag}</span>`;
+      notesListEl.appendChild(li);
+
+      const li2 = document.createElement('li');
+      li2.innerHTML = li.innerHTML;
+      notesAllEl.appendChild(li2);
+    });
+
+    // Quiz checking function
+    function checkQuiz() {
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      const resultDiv = document.getElementById('quiz-result');
+      
+      let score = 0;
+      let feedback = '';
+      
+      if (q1 && q1.value === 'd') {
+        score++;
+        feedback += '<p class="correct">✓ Question 1: Correct! Formal operational stage is right.</p>';
+      } else {
+        feedback += '<p class="incorrect">✗ Question 1: Incorrect. The correct answer is Formal operational stage.</p>';
+      }
+      
+      if (q2 && q2.value === 'b') {
+        score++;
+        feedback += '<p class="correct">✓ Question 2: Correct! Development is NOT the same for everyone.</p>';
+      } else {
+        feedback += '<p class="incorrect">✗ Question 2: Incorrect. The correct answer is "Development is the same for everyone".</p>';
+      }
+      
+      feedback = `<h3>Your Score: ${score}/2</h3>` + feedback;
+      resultDiv.innerHTML = feedback;
+      resultDiv.style.display = 'block';
+    }
+
+    // Open MCQ test (we will open the NEP HTML page if present, else alert)
+    document.getElementById('openMcq').addEventListener('click', function(e){
+      e.preventDefault();
+      // If you hosted the NEP test page, change this URL to its location.
+      // For now, open the Telegram channel as a fallback and show message.
+      window.open('https://t.me/ltgradegsfree', '_blank');
+      alert('MCQ Test available — open the Telegram channel or upload the interactive test page to your server and update the "Open NEP 2020 Test" link.');
+    });
+
+    // Subscribe form (placeholder)
+    document.getElementById('subForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      if(!email){ alert('Please enter email'); return; }
+      alert('Subscribed with ' + email + '. (This is a demo — integrate with Mailchimp/Server to store.)');
+      document.getElementById('email').value='';
+    });
+  </script>
+</body>
+</html>
